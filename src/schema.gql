@@ -32,8 +32,13 @@ type Needs {
 
 type Query {
   getRestaurantByName(input: String!): Restaurant
-  recommendRestaurants(date: String!): [Restaurant!]
+  recommendRestaurants(input: RecommendRestaurantInput!): [Restaurant!]
   getNeeds(input: String!): Needs
+}
+
+input RecommendRestaurantInput {
+  date: String!
+  startIndex: Float! = 0
 }
 
 type Mutation {

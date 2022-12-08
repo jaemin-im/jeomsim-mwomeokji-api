@@ -1,5 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateRestaurantInput } from './dtos/create-restaurant.dto';
+import { RecommendRestaurantInput } from './dtos/recommend-restaurant.dto';
 import { UpdateRestaurantInput } from './dtos/update-restaurant.dto';
 import { RestaurantService } from './restaurant.service';
 import { Restaurant } from './schema/restaurant.schema';
@@ -14,8 +15,8 @@ export class RestaurantResolver {
   }
 
   @Query(() => [Restaurant], { nullable: true })
-  async recommendRestaurants(@Args('date') date: string) {
-    return this.restaurantService.recommendRestaurants(date);
+  async recommendRestaurants(@Args('input') input: RecommendRestaurantInput) {
+    return this.restaurantService.recommendRestaurants(input);
   }
 
   @Mutation(() => Restaurant)

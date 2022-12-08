@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateRestaurantInput } from './dtos/create-restaurant.dto';
+import { RecommendRestaurantInput } from './dtos/recommend-restaurant.dto';
 import { UpdateRestaurantInput } from './dtos/update-restaurant.dto';
 
 @Injectable()
@@ -13,16 +14,15 @@ export class RestaurantService {
     });
   }
 
-  async recommendRestaurants(date: string) {
+  async recommendRestaurants(input: RecommendRestaurantInput) {
     const finalNeeds = await this.prisma.needs.findUnique({
       where: {
-        date,
+        date: input.date,
       },
     });
     console.log(finalNeeds);
     const finalNeedTotal =
       finalNeeds.kor + finalNeeds.chn + finalNeeds.jpn + finalNeeds.flour;
-    // {kor: 4, chn: -1, jpn: 2, west: 3}
 
     const allRestaurants = await this.prisma.restaurant.findMany({});
     const allCategories = await this.prisma.category.findMany({});
@@ -61,7 +61,7 @@ export class RestaurantService {
       a.score > b.score ? -1 : 1,
     );
 
-    return sortedScore.slice(undefined, 10);
+    return sortedScore.slice(input.startIndex, input.startIndex + 5);
   }
 
   async searchRestaurantByName(name: string) {
