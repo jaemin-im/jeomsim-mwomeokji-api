@@ -13,6 +13,11 @@ export class RestaurantResolver {
     return this.restaurantService.searchRestaurantByName(name);
   }
 
+  @Query(() => [Restaurant], { nullable: true })
+  async recommendRestaurants(@Args('date') date: string) {
+    return this.restaurantService.recommendRestaurants(date);
+  }
+
   @Mutation(() => Restaurant)
   async createRestaurant(@Args('input') restaurant: CreateRestaurantInput) {
     return this.restaurantService.createRestaurant(restaurant);

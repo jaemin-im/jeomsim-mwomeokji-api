@@ -31,6 +31,7 @@ type Needs {
 
 type Query {
   getRestaurantByName(input: String!): Restaurant
+  recommendRestaurants(date: String!): [Restaurant!]
   getNeeds(input: String!): Needs
 }
 
