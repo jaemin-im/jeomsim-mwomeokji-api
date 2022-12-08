@@ -26,7 +26,7 @@ type Needs {
   kor: Float!
   chn: Float!
   jpn: Float!
-  west: Float!
+  flour: Float!
 }
 
 type Query {
@@ -83,5 +83,5 @@ input UpdateNeedsInput {
   kor: Float
   chn: Float
   jpn: Float
-  west: Float
+  flour: Float
 }

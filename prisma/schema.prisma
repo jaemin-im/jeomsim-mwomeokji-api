@@ -30,9 +30,18 @@ model Restaurant {
 }
 
 model Needs {
-  date String @id
-  kor  Int // 한식
-  chn  Int // 중식
-  jpn  Int // 일식
-  west Int // 경양식
+  date  String @id
+  kor   Int // 한식
+  chn   Int // 중식
+  jpn   Int // 일식
+  flour Int // 분식
+}
+
+model Category {
+  id       Int    @id @default(autoincrement())
+  category String
+  kor      Float
+  chn      Float
+  jpn      Float
+  flour    Float
 }
