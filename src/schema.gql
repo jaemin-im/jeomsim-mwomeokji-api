@@ -1,0 +1,86 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Restaurant {
+  id: Float!
+  name: String!
+  landAddress: String
+  roadAddress: String
+  type: String
+  lon: Float
+  lat: Float
+  dist: Float
+  tags: String
+  beginTime: String
+  endTime: String
+  reviewRateAvg: Float
+  reviewCount: Float
+  thumbnailUrl: String
+  localRate: Float
+  lastVisitAt: String
+}
+
+type Needs {
+  date: String!
+  kor: Float!
+  chn: Float!
+  jpn: Float!
+  west: Float!
+}
+
+type Query {
+  getRestaurantByName(input: String!): Restaurant
+  getNeeds(input: String!): Needs
+}
+
+type Mutation {
+  createRestaurant(input: CreateRestaurantInput!): Restaurant!
+  updateRestaurant(input: UpdateRestaurantInput!): Restaurant!
+  upsertNeeds(input: UpdateNeedsInput!): Needs!
+}
+
+input CreateRestaurantInput {
+  name: String!
+  landAddress: String
+  roadAddress: String
+  type: String
+  lon: Float
+  lat: Float
+  dist: Float
+  tags: String
+  beginTime: String
+  endTime: String
+  reviewRateAvg: Float
+  reviewCount: Float
+  thumbnailUrl: String
+  localRate: Float
+  lastVisitAt: String
+}
+
+input UpdateRestaurantInput {
+  name: String
+  landAddress: String
+  roadAddress: String
+  type: String
+  lon: Float
+  lat: Float
+  dist: Float
+  tags: String
+  beginTime: String
+  endTime: String
+  reviewRateAvg: Float
+  reviewCount: Float
+  thumbnailUrl: String
+  localRate: Float
+  lastVisitAt: String
+  id: Float!
+}
+
+input UpdateNeedsInput {
+  date: String
+  kor: Float
+  chn: Float
+  jpn: Float
+  west: Float
+}

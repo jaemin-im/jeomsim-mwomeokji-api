@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Restaurant {
+  id            Int     @id @default(autoincrement())
+  name          String
+  landAddress   String?
+  roadAddress   String?
+  type          String?
+  lon           Float?
+  lat           Float?
+  dist          Float?
+  tags          String?
+  beginTime     String?
+  endTime       String?
+  reviewRateAvg Float?
+  reviewCount   Int?
+  thumbnailUrl  String?
+  localRate     Int?
+  lastVisitAt   String?
+}
+
+model Needs {
+  date String @id
+  kor  Int // 한식
+  chn  Int // 중식
+  jpn  Int // 일식
+  west Int // 경양식
+}
