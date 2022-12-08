@@ -15,5 +15,5 @@ export class Needs {
   jpn: number;
 
   @Field(() => Number)
-  west: number;
+  flour: number;
 }

@@ -22,5 +22,5 @@ export class UpdateNeedsInput {
 
   @Field(() => Number, { nullable: true })
   @IsNumber()
-  west: number;
+  flour: number;
 }
