@@ -3,6 +3,7 @@ import { PrismaService } from 'src/prisma.service';
 import { CreateRestaurantInput } from './dtos/create-restaurant.dto';
 import { RecommendRestaurantInput } from './dtos/recommend-restaurant.dto';
 import { UpdateRestaurantInput } from './dtos/update-restaurant.dto';
+import _ from 'underscore';
 
 @Injectable()
 export class RestaurantService {
@@ -27,13 +28,28 @@ export class RestaurantService {
     const allRestaurants = await this.prisma.restaurant.findMany({});
     const allCategories = await this.prisma.category.findMany({});
 
+    const removedTags = [
+      '신규맛집',
+      '1인분주문',
+      'SNS맛집',
+      '카페디저트',
+      '테이크아웃',
+      '프랜차이즈',
+      '야식',
+      '예약픽업',
+    ];
     const restaurantScore = [];
 
     for (const restaurant of allRestaurants) {
       if (restaurant.tags !== null) {
         let score = 0;
-        const replacedTags = JSON.parse(restaurant.tags.replaceAll("'", '"'));
+        let replacedTags = JSON.parse(restaurant.tags.replaceAll("'", '"'));
         for (const tag of replacedTags) {
+          if (_.contains(removedTags, tag)) {
+            replacedTags = replacedTags.filter(
+              (tag) => !_.contains(removedTags, tag),
+            );
+          }
           if (allCategories.some((c) => c.category == tag)) {
             const scoredCat = allCategories.find((c) => c.category === tag);
             score +=
@@ -46,7 +62,7 @@ export class RestaurantService {
         score = Number(
           (
             score / replacedTags.length -
-            (5 - restaurant.reviewRateAvg) * 0.2
+            (5 - restaurant.reviewRateAvg) * 0.05
           ).toFixed(4),
         );
         console.log(restaurant.name, replacedTags, score);
