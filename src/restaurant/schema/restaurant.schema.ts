@@ -49,4 +49,7 @@ export class Restaurant {
 
   @Field(() => String, { nullable: true })
   lastVisitAt: string;
+
+  @Field(() => Number, { nullable: true })
+  score: number;
 }

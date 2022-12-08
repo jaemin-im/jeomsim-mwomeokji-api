@@ -19,6 +19,7 @@ type Restaurant {
   thumbnailUrl: String
   localRate: Float
   lastVisitAt: String
+  score: Float
 }
 
 type Needs {
